@@ -8,25 +8,33 @@
     .g { fill: #7f8aa3; }
     .d { fill: #3a4459; }
 
-    /* the gate scene: car rolls up, gets scanned, barrier lifts, car leaves, barrier drops */
-    .car  { animation: car 7s cubic-bezier(.5,0,.3,1) infinite; }
-    .arm  { transform-box: fill-box; transform-origin: 100% 50%; animation: arm 7s ease-in-out infinite; }
-    .scan { animation: scan 7s steps(1) infinite; }
-    .ok   { animation: ok 7s steps(1) infinite; }
-    @keyframes car  { 0% { transform: translateX(-320px); } 30%,52% { transform: translateX(0); } 82%,100% { transform: translateX(480px); } }
-    @keyframes arm  { 0%,40% { transform: rotate(0); } 50%,80% { transform: rotate(78deg); } 92%,100% { transform: rotate(0); } }
-    @keyframes scan { 0% { opacity: 0; } 30% { opacity: 1; } 40% { opacity: 0; } }
-    @keyframes ok   { 0% { opacity: 0; } 40% { opacity: 1; } 84% { opacity: 0; } }
+    /* the DocRepo scene: a document is scanned, splits into chunks, chunks get embedded */
+    .paper   { animation: paper 7s infinite; }
+    .ink     { animation: ink 7s infinite; }
+    .scanner { animation: scanner 7s linear infinite; }
+    .k1 { animation: k1 7s cubic-bezier(.5,0,.3,1) infinite; }
+    .k2 { animation: k2 7s cubic-bezier(.5,0,.3,1) infinite; }
+    .k3 { animation: k3 7s cubic-bezier(.5,0,.3,1) infinite; }
+    .k4 { animation: k4 7s cubic-bezier(.5,0,.3,1) infinite; }
+    .s1 { animation: s1 7s steps(1) infinite; }
+    .s2 { animation: s2 7s steps(1) infinite; }
+    .s3 { animation: s3 7s steps(1) infinite; }
+    @keyframes paper   { 0% { opacity: 0; } 5%,88% { opacity: 1; } 96%,100% { opacity: 0; } }
+    @keyframes ink     { 0%,25% { opacity: 1; } 34%,100% { opacity: .12; } }
+    @keyframes scanner { 0%,5% { transform: translateY(0); opacity: 0; } 6%,22% { opacity: 1; } 22% { transform: translateY(78px); } 23%,100% { transform: translateY(78px); opacity: 0; } }
+    @keyframes k1 { 0%,25% { transform: translate(-192px,9px); opacity: 0; } 27% { opacity: 1; } 38%,88% { transform: translate(0,0); opacity: 1; } 96%,100% { transform: translate(0,0); opacity: 0; } }
+    @keyframes k2 { 0%,28% { transform: translate(-192px,-2px); opacity: 0; } 30% { opacity: 1; } 41%,88% { transform: translate(0,0); opacity: 1; } 96%,100% { transform: translate(0,0); opacity: 0; } }
+    @keyframes k3 { 0%,31% { transform: translate(-192px,-13px); opacity: 0; } 33% { opacity: 1; } 44%,88% { transform: translate(0,0); opacity: 1; } 96%,100% { transform: translate(0,0); opacity: 0; } }
+    @keyframes k4 { 0%,34% { transform: translate(-192px,-24px); opacity: 0; } 36% { opacity: 1; } 47%,88% { transform: translate(0,0); opacity: 1; } 96%,100% { transform: translate(0,0); opacity: 0; } }
+    @keyframes s1 { 0% { opacity: 0; } 5% { opacity: 1; } 25% { opacity: 0; } }
+    @keyframes s2 { 0% { opacity: 0; } 25% { opacity: 1; } 47% { opacity: 0; } }
+    @keyframes s3 { 0% { opacity: 0; } 47% { opacity: 1; } 92% { opacity: 0; } }
 
     .bar    { animation: bar 2.6s ease-in-out infinite; }
     .cursor { animation: blink 1s steps(1) infinite; }
     @keyframes bar   { 0% { width: 0; } 70%,100% { width: 84px; } }
     @keyframes blink { 50% { opacity: 0; } }
   </style>
-  <defs>
-    <clipPath id="road"><rect x="30" y="250" width="430" height="200"/></clipPath>
-  </defs>
-
   <!-- window -->
   <rect width="1200" height="540" rx="12" fill="#05070d"/>
   <rect x=".5" y=".5" width="1199" height="539" rx="12" fill="none" stroke="#1a2233"/>
@@ -45,31 +53,34 @@
   </text>
   <text x="70" y="226" class="g">// full-stack products, AI built in</text>
 
-  <!-- left: the gate -->
-  <g clip-path="url(#road)">
+  <!-- left: a document becomes chunks -->
+  <g class="paper">
     <text class="g">
-      <tspan x="388" y="292"> _ </tspan>
-      <tspan x="388" y="311">|o|</tspan>
-      <tspan x="388" y="330">| |</tspan>
-      <tspan x="388" y="349">| |</tspan>
-      <tspan x="388" y="368">| |</tspan>
-      <tspan x="388" y="387">|_|</tspan>
+      <tspan x="60" y="290"> ____________</tspan>
+      <tspan x="60" y="309">|            |</tspan>
+      <tspan x="60" y="328">|            |</tspan>
+      <tspan x="60" y="347">|            |</tspan>
+      <tspan x="60" y="366">|            |</tspan>
+      <tspan x="60" y="385">|____________|</tspan>
     </text>
-    <text x="290" y="306" class="arm c">===========</text>
-
-    <g class="car">
-      <text class="w">
-        <tspan x="40" y="330">      ______________</tspan>
-        <tspan x="40" y="349">   __/   |     |    \___</tspan>
-        <tspan x="40" y="368">  |  _   |     |   _    |</tspan>
-        <tspan x="40" y="387">  '-(_)-------------(_)-'</tspan>
-      </text>
-    </g>
+    <text class="w ink">
+      <tspan x="87" y="309">--------</tspan>
+      <tspan x="87" y="328">------</tspan>
+      <tspan x="87" y="347">--------</tspan>
+      <tspan x="87" y="366">-----</tspan>
+    </text>
   </g>
-  <text x="40" y="404" class="d">------------------------------------------------</text>
-  <text x="40" y="436" class="g">&gt; plate CL 10 VR 1025</text>
-  <text x="40" y="458" class="scan v">&gt; scanning...</text>
-  <text x="40" y="458" class="ok c">&gt; access granted · barrier up</text>
+  <rect x="66" y="296" width="114" height="2" fill="#00e5ff" class="scanner"/>
+  <text x="210" y="347" class="d">-&gt;</text>
+  <text x="279" y="300" class="k1"><tspan class="c">[========]</tspan><tspan class="g"> 01</tspan></text>
+  <text x="279" y="330" class="k2"><tspan class="c">[======]  </tspan><tspan class="g"> 02</tspan></text>
+  <text x="279" y="360" class="k3"><tspan class="c">[========]</tspan><tspan class="g"> 03</tspan></text>
+  <text x="279" y="390" class="k4"><tspan class="c">[=====]   </tspan><tspan class="g"> 04</tspan></text>
+  <text x="40" y="414" class="d">------------------------------------------------</text>
+  <text x="40" y="440" class="g">&gt; ingest report.pdf</text>
+  <text x="40" y="462" class="s1 v">&gt; scanning (OCR)...</text>
+  <text x="40" y="462" class="s2 v">&gt; chunking...</text>
+  <text x="40" y="462" class="s3 c">&gt; 4 chunks embedded · ask away</text>
 
   <!-- right: system info -->
   <text x="520" y="76"><tspan class="c">vigneshwaran</tspan><tspan class="w">@</tspan><tspan class="c">bengaluru</tspan></text>
