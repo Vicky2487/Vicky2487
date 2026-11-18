@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 330" width="1200" height="330">
+  <!-- The career as a git log graph: draws itself once, then HEAD keeps pulsing and a deploy runs up main. -->
+  <style>
+    .mono  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 1.5px; fill: #7f8aa3; }
+    .title { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; fill: #e8ecf5; }
+    .cmd   { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 14px; fill: #7f8aa3; }
+    .line  { fill: none; stroke: #00e5ff; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .6s ease-out forwards; }
+    .side  { stroke: #7fdcff; }
+    .pop   { opacity: 0; animation: pop .35s ease-out forwards; }
+    .ring  { fill: none; stroke: #00e5ff; stroke-width: 2; transform-box: fill-box; transform-origin: center; opacity: 0; animation: ping 2s 2.8s ease-out infinite; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes pop  { to { opacity: 1; } }
+    @keyframes ping { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(2.4); opacity: 0; } }
+  </style>
+
+  <rect width="1200" height="330" rx="12" fill="#05070d"/>
+  <rect x=".5" y=".5" width="1199" height="329" rx="12" fill="none" stroke="#1a2233"/>
+  <text x="40" y="44" class="cmd"><tspan fill="#00e5ff">$</tspan> git log --graph --career</text>
+
+  <!-- branches -->
+  <path class="line" pathLength="1" d="M110 200 H360" style="animation-delay:.2s"/>
+  <path class="line" pathLength="1" d="M360 200 H720" style="animation-delay:.9s;animation-duration:1s"/>
+  <path class="line side" pathLength="1" d="M360 200 C430 200 470 125 560 125" style="animation-delay:.9s;animation-duration:.5s"/>
+  <path class="line side" pathLength="1" d="M560 125 C650 125 680 200 720 200" style="animation-delay:1.45s;animation-duration:.45s"/>
+  <path class="line" pathLength="1" d="M720 200 H860" style="animation-delay:2s;animation-duration:.4s"/>
+
+  <!-- next/computer-vision: dashed, still open -->
+  <g stroke="#8b6cff" stroke-width="3" stroke-linecap="round">
+    <line class="pop" x1="872" y1="195" x2="895" y2="186" style="animation-delay:2.9s"/>
+    <line class="pop" x1="912" y1="180" x2="935" y2="171" style="animation-delay:3.0s"/>
+    <line class="pop" x1="952" y1="165" x2="975" y2="156" style="animation-delay:3.1s"/>
+    <line class="pop" x1="992" y1="150" x2="1015" y2="141" style="animation-delay:3.2s"/>
+    <line class="pop" x1="1032" y1="135" x2="1055" y2="126" style="animation-delay:3.3s"/>
+  </g>
+  <circle class="pop" cx="1080" cy="117" r="7" fill="none" stroke="#8b6cff" stroke-width="2.5" style="animation-delay:3.45s"/>
+  <g class="pop" style="animation-delay:3.5s">
+    <text x="1095" y="96" text-anchor="end" class="mono" fill="#8b6cff" style="fill:#8b6cff">NEXT/COMPUTER-VISION</text>
+    <text x="1095" y="78" text-anchor="end" class="mono" style="font-size:11px">not started · loading</text>
+  </g>
+
+  <!-- commits -->
+  <g class="pop" style="animation-delay:.05s">
+    <circle cx="110" cy="200" r="9" fill="#00e5ff"/>
+    <text x="96" y="240" class="mono">INIT · 2021</text>
+    <text x="96" y="264" class="title">BCA</text>
+    <text x="96" y="286" class="title" style="fill:#7f8aa3">Baldwin Methodist College</text>
+  </g>
+  <g class="pop" style="animation-delay:.8s">
+    <circle cx="360" cy="200" r="9" fill="#00e5ff"/>
+    <text x="346" y="240" class="mono">FEAT · 2024</text>
+    <text x="346" y="264" class="title">MCA</text>
+    <text x="346" y="286" class="title" style="fill:#7f8aa3">Kristu Jayanti University</text>
+  </g>
+  <g class="pop" style="animation-delay:1.4s">
+    <circle cx="560" cy="125" r="9" fill="#7fdcff"/>
+    <text x="546" y="84" class="mono">INTERN/NANO-STREAM · 2026</text>
+    <text x="546" y="106" class="title">Python Developer Intern</text>
+  </g>
+  <g class="pop" style="animation-delay:1.95s">
+    <circle cx="720" cy="200" r="5.5" fill="#00e5ff"/>
+    <text x="708" y="240" class="mono">MERGE</text>
+  </g>
+  <g class="pop" style="animation-delay:2.4s">
+    <circle cx="860" cy="200" r="11" fill="#00e5ff"/>
+    <text x="846" y="240" class="mono">RELEASE · NOW</text>
+    <text x="846" y="264" class="title">Software Engineer</text>
+    <text x="846" y="286" class="title" style="fill:#7f8aa3">Shree Ram AI Solutions</text>
+  </g>
+  <circle class="ring" cx="860" cy="200" r="13"/>
+
+  <!-- HEAD -->
+  <g class="pop" style="animation-delay:2.6s">
+    <rect x="770" y="140" width="62" height="24" rx="4" fill="#00e5ff"/>
+    <text x="801" y="157" text-anchor="middle" class="mono" style="fill:#05141a;font-weight:700">HEAD</text>
+    <path d="M832 158 L848 188" stroke="#00e5ff" stroke-width="2"/>
+  </g>
+
+  <!-- a deploy pulse keeps running up main -->
+  <circle r="4" fill="#ffffff" opacity="0">
+    <set attributeName="opacity" to="1" begin="2.8s"/>
+    <animateMotion dur="2.4s" begin="2.8s" repeatCount="indefinite" path="M110 200 H860"/>
+  </circle>
+</svg>
